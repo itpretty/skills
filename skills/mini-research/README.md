@@ -35,7 +35,7 @@ Output formats: **Markdown**, **HTML** (mobile-responsive), and **PDF**
 Invoke the skill in Claude Code:
 
 ```
-/itpretty-skills:mini-research [your research topic]
+/mini-research [your research topic]
 ```
 
 All files are organized in step-based directories (`step1-...`, `step2-...`, etc.) under a kebab-case root folder named after your topic.

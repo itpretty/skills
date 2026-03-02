@@ -7,9 +7,14 @@ A Claude Code plugin package with custom skills.
 **Option 1: Using Claude Code CLI (Recommended)**
 
 ```bash
+# start claude
 claude
+
+# add new market
 /plugin marketplace add itpretty/skills
 
+# install skill mini-research
+/plugin install mini-research@itpretty-skills
 ```
 
 **Option 2: Manual Installation**
@@ -29,7 +34,7 @@ A scaled-down research workflow—from asking questions, finding literature, rea
 **Usage:**
 
 ```
-/itpretty-skills:mini-research [your research topic]
+/mini-research [your research topic]
 ```
 
 [Learn more](./skills/mini-research/README.md)
