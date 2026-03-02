@@ -1,0 +1,10 @@
+{
+  "name": "itpretty-skills",
+  "description": "Custom Skills for Claude Code including Mini Research workflow",
+  "version": "1.0.0",
+  "author": {
+    "name": "itpretty"
+  },
+  "repository": "https://github.com/itpretty/skills",
+  "license": "MIT"
+}

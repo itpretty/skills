@@ -2,24 +2,6 @@
 
 A Claude Code skill that guides you through a scaled-down academic research workflow—from formulating questions to writing research summaries.
 
-## Installation
-
-**Option 1: Using npx (Recommended)**
-
-```bash
-npx skills add mini-research@itpretty/skills
-```
-
-**Option 2: Manual Installation**
-
-Copy the skill folder to your Claude Code skills directory:
-
-```bash
-cp -r mini-research ~/.claude/skills/
-```
-
-Or add to your project's `.claude/skills/` directory for project-specific use.
-
 ## Purpose
 
 Help users systematically identify and explore research topics suitable for scientific study through:
@@ -53,7 +35,7 @@ Output formats: **Markdown**, **HTML** (mobile-responsive), and **PDF**
 Invoke the skill in Claude Code:
 
 ```
-/mini-research [your research topic]
+/itpretty-skills:mini-research [your research topic]
 ```
 
 All files are organized in step-based directories (`step1-...`, `step2-...`, etc.) under a kebab-case root folder named after your topic.
