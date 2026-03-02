@@ -5,13 +5,12 @@
   },
   "metadata": {
     "description": "Custom Skills for Claude Code",
-    "version": "1.0.0",
-    "pluginRoot": "../skills"
+    "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "mini-research",
-      "source": "./mini-research",
+      "source": "./",
       "description": "Execute a scaled-down research workflow from question formulation, literature search, paper reading, synthesis to conclusion writing",
       "version": "1.0.0",
       "author": {
@@ -20,7 +19,10 @@
       "repository": "https://github.com/itpretty/skills",
       "license": "MIT",
       "category": "research",
-      "tags": ["research", "literature-review", "academic", "paper-analysis"]
+      "tags": ["research", "literature-review", "academic", "paper-analysis"],
+      "skills": [
+        "./skills/mini-research"
+      ]
     }
   ]
 }

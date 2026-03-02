@@ -7,7 +7,9 @@ A Claude Code plugin package with custom skills.
 **Option 1: Using Claude Code CLI (Recommended)**
 
 ```bash
-claude plugin add https://github.com/itpretty/skills
+claude
+/plugin marketplace add itpretty/skills
+
 ```
 
 **Option 2: Manual Installation**
