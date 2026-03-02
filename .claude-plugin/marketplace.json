@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "mini-research",
-      "source": "mini-research",
+      "source": "./mini-research",
       "description": "Execute a scaled-down research workflow from question formulation, literature search, paper reading, synthesis to conclusion writing",
       "version": "1.0.0",
       "author": {
