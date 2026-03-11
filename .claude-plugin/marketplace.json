@@ -23,6 +23,22 @@
       "skills": [
         "./skills/mini-research"
       ]
+    },
+    {
+      "name": "research-proposal",
+      "source": "./",
+      "description": "Generate academic research proposals for PhD applications following Nature Reviews-style writing conventions. Supports STEM, humanities, and social sciences with 6-phase workflow: requirements gathering, literature collection, outline generation, content writing, output review, and PDF conversion. Supports English and Chinese output.",
+      "version": "1.0.0",
+      "author": {
+        "name": "itpretty"
+      },
+      "repository": "https://github.com/itpretty/skills",
+      "license": "MIT",
+      "category": "research",
+      "tags": ["research", "proposal", "academic", "phd-application", "writing"],
+      "skills": [
+        "./skills/research-proposal"
+      ]
     }
   ]
 }
