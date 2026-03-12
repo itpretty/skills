@@ -182,6 +182,10 @@ class BookmarkAnchor(Flowable):
         return (0, 0)
 
 
+# Total page count — filled after first build pass
+_total_pages = [0]
+
+
 # ============================================================
 # Page templates with headers/footers
 # ============================================================
@@ -189,22 +193,26 @@ def _cover_page(canvas, doc):
     """No header/footer on cover page."""
     pass
 
-def _toc_page(canvas, doc):
-    """Page number only on TOC pages."""
+def _draw_footer(canvas):
+    """Draw page number footer: - N/total -"""
     canvas.saveState()
     canvas.setFont(FONT, 7.5)
     canvas.setFillColor(MUTED)
-    canvas.drawCentredString(PAGE_W / 2, 1.3*cm, f"— {canvas.getPageNumber()} —")
+    total = _total_pages[0] or '?'
+    canvas.drawCentredString(PAGE_W / 2, 1.3*cm,
+                             f"{canvas.getPageNumber()}/{total}")
     canvas.restoreState()
+
+def _toc_page(canvas, doc):
+    """Page number on TOC pages."""
+    _draw_footer(canvas)
 
 _running_header_text = 'Research Proposal'
 
 def _content_page(canvas, doc):
     """Page number + running header on content pages."""
+    _draw_footer(canvas)
     canvas.saveState()
-    canvas.setFont(FONT, 7.5)
-    canvas.setFillColor(MUTED)
-    canvas.drawCentredString(PAGE_W / 2, 1.3*cm, f"— {canvas.getPageNumber()} —")
     # Running header
     canvas.setStrokeColor(RULE_COLOR)
     canvas.setLineWidth(0.4)
@@ -768,12 +776,23 @@ def build_pdf(md_file, out_pdf=None):
             story.append(Spacer(1, 2*mm))
 
         elif el['type'] == 'olist':
-            for idx, item in enumerate(el['items'], 1):
-                story.append(Paragraph(f"<b>{idx}.</b>  {md_inline(item)}", s_olist))
+            if in_references:
+                for idx, item in enumerate(el['items'], 1):
+                    ref_counter += 1
+                    story.append(Paragraph(
+                        f'<a name="ref-{ref_counter}"/>[{ref_counter}] {md_inline(item)}',
+                        s_ref))
+            else:
+                for idx, item in enumerate(el['items'], 1):
+                    story.append(Paragraph(f"<b>{idx}.</b>  {md_inline(item)}", s_olist))
 
         elif el['type'] == 'ulist':
-            for item in el['items']:
-                story.append(Paragraph(f"\u2022  {md_inline(item)}", s_ulist))
+            if in_references:
+                for item in el['items']:
+                    story.append(Paragraph(f"{md_inline(item)}", s_ref))
+            else:
+                for item in el['items']:
+                    story.append(Paragraph(f"\u2022  {md_inline(item)}", s_ulist))
 
         elif el['type'] == 'table':
             tbl_lines = el['lines']
@@ -829,6 +848,17 @@ def build_pdf(md_file, out_pdf=None):
             story.append(HRFlowable(CONTENT_W, RULE_COLOR, 0.5))
             story.append(Spacer(1, 2*mm))
 
+    # Two-pass build: first pass counts pages, second renders with total
+    import io, copy
+    buf = io.BytesIO()
+    doc_tmp = BaseDocTemplate(buf, pagesize=A4,
+        leftMargin=MARGIN_L, rightMargin=MARGIN_R,
+        topMargin=MARGIN_T, bottomMargin=MARGIN_B)
+    doc_tmp.addPageTemplates(doc.pageTemplates)
+    story_copy = copy.deepcopy(story)
+    doc_tmp.build(story_copy)
+    _total_pages[0] = doc_tmp.page
+    buf.close()
     doc.build(story)
     print(f"PDF saved: {out_pdf}")
 
