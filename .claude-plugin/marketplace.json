@@ -39,6 +39,22 @@
       "skills": [
         "./skills/research-proposal"
       ]
+    },
+    {
+      "name": "telegram-message-handler",
+      "source": "./",
+      "description": "Handle Telegram messages for a personal bot. Check for new messages, process requests, and send responses back via the Telegram Bot API. Supports authorized single-user mode with automatic message filtering and error handling.",
+      "version": "1.0.0",
+      "author": {
+        "name": "itpretty"
+      },
+      "repository": "https://github.com/itpretty/skills",
+      "license": "MIT",
+      "category": "automation",
+      "tags": ["telegram", "bot", "messaging", "automation"],
+      "skills": [
+        "./skills/telegram-message-handler"
+      ]
     }
   ]
 }
