@@ -35,6 +35,11 @@ python3 .claude/skills/telegram-message-handler/scripts/pull.py
 
 This script reads `.env`, fetches unprocessed updates, filters to the allowed user ID, and prints each message as a JSON line. It also persists the last `update_id` in `.telegram_offset` so you don't re-read old messages.
 
+The script automatically detects and downloads media (photos, documents, videos, audio, voice notes, stickers, animations). Downloaded files are saved to `.telegram_media/` at the project root. Each message JSON includes:
+- `text`: the text content (empty string if no text)
+- `caption`: the media caption (empty string if no caption)
+- `media`: (present when the message contains media) an object with `type`, `file_id`, `local_path`, and type-specific metadata like `width`/`height` for images
+
 If you prefer to call the API directly (e.g., via `curl`), the flow is:
 
 1. Read the offset from `.telegram_offset` (or start from 0)
